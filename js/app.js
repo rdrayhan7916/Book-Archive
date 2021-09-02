@@ -1,6 +1,6 @@
+const errorHandale = document.getElementById('errors')
 const searchBook = () => {
     const search = document.getElementById('search-text')
-    const errorHandale = document.getElementById('errors')
     const searchText = search.value;
     if (searchText === '') {
         errorHandale.innerText = `Search Feild Cannot Be Empty`
@@ -35,6 +35,7 @@ const toggleErrorHandle = visibilityStyle => {
 }
 //         Display-Result
 const displaySearchResult = books => {
+    errorHandale.textContent = ''
     const searchResult = document.getElementById('search-result')
     searchResult.textContent = ''
     const bookQuantity = document.getElementById('book-quantity')
