@@ -1,20 +1,26 @@
 const searchBook = () => {
     const search = document.getElementById('search-text')
+    const errorHandale = document.getElementById('errors')
     const searchText = search.value;
+    if (searchText === '') {
+        errorHandale.innerText = `Search Feild Cannot Be Empty`
+
+    }
     // console.log(searchText)
 
     toggleSpinner('visible')
     toggleSearchResult('hidden')
     toggleBookQuantity('hidden')
+    toggleErrorHandle('hidden')
     search.value = ''
     const url = `http://openlibrary.org/search.json?q=${searchText}`
-    console.log(url)
-
+    // console.log(url)
+    toggleErrorHandle('visible')
     fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data.docs))
 }
-
+//          Toggle-Handle
 const toggleSpinner = visibilityStyle => {
     document.getElementById('spinner').style.visibility = visibilityStyle;
 }
@@ -24,6 +30,10 @@ const toggleSearchResult = visibilityStyle => {
 const toggleBookQuantity = visibilityStyle => {
     document.getElementById('book-quantity').style.visibility = visibilityStyle;
 }
+const toggleErrorHandle = visibilityStyle => {
+    document.getElementById('errors').style.visibility = visibilityStyle;
+}
+//         Display-Result
 const displaySearchResult = books => {
     const searchResult = document.getElementById('search-result')
     searchResult.textContent = ''
@@ -37,7 +47,6 @@ const displaySearchResult = books => {
     toggleBookQuantity('visible')
     books.forEach(book => {
         // console.log(book)
-
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
@@ -55,6 +64,7 @@ const displaySearchResult = books => {
         toggleSpinner('hidden')
         toggleSearchResult('visiable')
         toggleBookQuantity('visible')
+        toggleErrorHandle('hidden')
     })
 
 }
