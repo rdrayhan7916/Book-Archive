@@ -11,11 +11,9 @@ const searchBook = () => {
     toggleSpinner('visible')
     toggleSearchResult('hidden')
     toggleBookQuantity('hidden')
-    toggleErrorHandle('hidden')
     search.value = ''
     const url = `http://openlibrary.org/search.json?q=${searchText}`
     // console.log(url)
-    toggleErrorHandle('visible')
     fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data.docs))
@@ -30,9 +28,7 @@ const toggleSearchResult = visibilityStyle => {
 const toggleBookQuantity = visibilityStyle => {
     document.getElementById('book-quantity').style.visibility = visibilityStyle;
 }
-const toggleErrorHandle = visibilityStyle => {
-    document.getElementById('errors').style.visibility = visibilityStyle;
-}
+
 //         Display-Result
 const displaySearchResult = books => {
     errorHandale.textContent = ''
@@ -65,7 +61,6 @@ const displaySearchResult = books => {
         toggleSpinner('hidden')
         toggleSearchResult('visiable')
         toggleBookQuantity('visible')
-        toggleErrorHandle('hidden')
     })
 
 }
